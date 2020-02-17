@@ -32,7 +32,8 @@ final class StudentFormActions
         add_action('user_new_form', [$this, 'edit_admin_registration_form']);
         add_action('edit_user_created_user', [$this, 'update_student_meta']);
         add_action('show_user_profile', [$this, 'crf_show_extra_profile_fields']);
-        add_action('edit_user_profile', [$this, 'crf_show_extra_profile_fields']);
+        add_action('edit_user_profile', [$this, 'crf_edit_extra_profile_fields']);
+        add_action('edit_user_profile_update', [$this, 'update_student_meta']);
     }
 
     /**
@@ -63,4 +64,11 @@ final class StudentFormActions
         ]);
     }
 
+    public function crf_edit_extra_profile_fields($user): void
+    {
+        $meta = $this->repository->getByUserId($user->ID);
+        TemplateManager::load(TemplateManager::STUDENT_FORM_EDIT_TEMPLATE)->show([
+            'numberOfStudentCard' => $meta->getNumberOfStudentCard()
+        ]);
+    }
 }

@@ -28,4 +28,3 @@ function start()
 
     (new StudentFormActions($repository))->init_actions();
 }
-

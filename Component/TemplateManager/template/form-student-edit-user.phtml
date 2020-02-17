@@ -1,0 +1,12 @@
+<h3><?php use const StudentUtility\LOCALE_DOMAIN;
+
+    esc_html_e('Student Personal Information', LOCALE_DOMAIN); ?></h3>
+
+<table class="form-table">
+    <tr>
+        <th><label for="numberOfStudentCard"><?php esc_html_e('Number of student card', LOCALE_DOMAIN); ?></label></th>
+        <td>
+            <input type="number" id="numberOfStudentCard" name="numberOfStudentCard" class="regular-text" value="<?php echo $data['numberOfStudentCard']?>"/>
+        </td>
+    </tr>
+</table>
