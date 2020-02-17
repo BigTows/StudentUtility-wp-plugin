@@ -61,7 +61,14 @@ final class StudentMeta
         $this->numberOfStudentCard = $numberOfStudentCard;
     }
 
-
+    /**
+     * Builder
+     *
+     * @param int      $userId
+     * @param int|null $numberOfStudentCard
+     *
+     * @return StudentMeta
+     */
     public static function builder(int $userId, ?int $numberOfStudentCard): StudentMeta
     {
         return new StudentMeta($userId, $numberOfStudentCard);

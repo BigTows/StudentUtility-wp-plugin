@@ -1,28 +1,45 @@
 <?php
+
 namespace StudentUtility\Repository;
 
 use StudentUtility\Repository\Meta\StudentMeta;
 
 require_once 'StudentMetaRepositoryInterface.php';
 
+/**
+ * Implements of student meta repository based on wordpress functionality
+ *
+ * @package StudentUtility\Repository
+ */
 final class StudentMetaRepositoryInterfaceWordPressFunctionality implements StudentMetaRepositoryInterface
 {
 
+    /**
+     * {@inheritDoc}
+     */
     public function getByUserId(int $userId): StudentMeta
     {
         return StudentMeta::builder($userId, $this->getSingleMetaOrNull($userId, self::NUMBER_OF_STUDENT_CARD));
     }
 
-
-    public function save(StudentMeta $student_Meta): void
+    /**
+     * {@inheritDoc}
+     */
+    public function save(StudentMeta $studentMeta): void
     {
-        if ($student_Meta->getNumberOfStudentCard() !== null) {
-            $this->setMeta($student_Meta->getUserId(), self::NUMBER_OF_STUDENT_CARD, $student_Meta->getNumberOfStudentCard());
+        if ($studentMeta->getNumberOfStudentCard() !== null) {
+            $this->setOrUpdateMetaData($studentMeta->getUserId(), self::NUMBER_OF_STUDENT_CARD, $studentMeta->getNumberOfStudentCard());
         }
     }
 
-
-    private function setMeta($userId, $metaName, $metaValue): void
+    /**
+     * Init or update meta value
+     *
+     * @param int    $userId    user id
+     * @param string $metaName  name of meta
+     * @param mixed  $metaValue value of meta
+     */
+    private function setOrUpdateMetaData(int $userId, $metaName, $metaValue): void
     {
         if ($this->getSingleMetaOrNull($userId, $metaName) === null) {
             add_user_meta($userId, $metaName, $metaValue);
@@ -31,7 +48,15 @@ final class StudentMetaRepositoryInterfaceWordPressFunctionality implements Stud
         }
     }
 
-    private function getSingleMetaOrNull($userId, $metaName)
+    /**
+     * Get only one meta value from storage
+     *
+     * @param int    $userId   user id
+     * @param string $metaName meta name
+     *
+     * @return mixed|null
+     */
+    private function getSingleMetaOrNull(int $userId, string $metaName)
     {
         $result = get_user_meta($userId, $metaName);
         if (!is_array($result) || count($result) === 0) {

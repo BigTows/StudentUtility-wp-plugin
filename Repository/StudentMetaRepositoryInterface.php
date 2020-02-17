@@ -14,13 +14,25 @@ require_once 'meta/StudentMeta.php';
  */
 interface StudentMetaRepositoryInterface
 {
-
+    /**
+     * Key of meta for number of student card
+     */
     public const NUMBER_OF_STUDENT_CARD = 'number_of_student_card';
 
-
+    /**
+     * Get Student meta by user id
+     *
+     * @param int $userId based on wordpress system
+     *
+     * @return StudentMeta
+     */
     public function getByUserId(int $userId): StudentMeta;
 
-    public function save(StudentMeta $student_Meta): void;
-
+    /**
+     * Save student meta data
+     *
+     * @param StudentMeta $studentMeta instance for saving
+     */
+    public function save(StudentMeta $studentMeta): void;
 
 }
