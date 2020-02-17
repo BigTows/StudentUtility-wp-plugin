@@ -1,12 +1,14 @@
 <?php
 namespace StudentUtility\Component\TemplateManager;
 
+use RuntimeException;
+
 require 'Template.php';
 
 /**
  * Manager of template
  */
-final class Template_Manager
+final class TemplateManager
 {
     private const PATH_TO_TEMPLATE = 'template/';
     public const STUDENT_FORM_TEMPLATE = 'studentFormTemplate';
@@ -22,10 +24,10 @@ final class Template_Manager
      *
      * @return Template
      */
-    public static function load($nameOfTemplate): \Template
+    public static function load($nameOfTemplate): Template
     {
         if (!isset(static::$mapOfTemplate[$nameOfTemplate])) {
-            throw new \RuntimeException("Can't find template with name: {$nameOfTemplate}");
+            throw new RuntimeException("Can't find template with name: {$nameOfTemplate}");
         }
 
         return new Template(self::PATH_TO_TEMPLATE . static::$mapOfTemplate[$nameOfTemplate]);

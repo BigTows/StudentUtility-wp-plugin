@@ -1,6 +1,6 @@
 <?php
 
-namespace StudentUtility\Component\TemplateManager
+namespace StudentUtility\Component\TemplateManager;
 
 final class Template
 {
@@ -21,9 +21,11 @@ final class Template
      * Show template on page
      *
      * @param array $data
-     */
+     *
+     * @noinspection PhpUnusedParameterInspection*/
     public function show($data = []): void
     {
+        /** @noinspection PhpIncludeInspection */
         include $this->pathToFile;
     }
 }

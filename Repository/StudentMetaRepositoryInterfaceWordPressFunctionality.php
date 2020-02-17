@@ -1,9 +1,11 @@
 <?php
 namespace StudentUtility\Repository;
 
-require_once 'interface-student-meta-repository.php';
+use StudentUtility\Repository\Meta\StudentMeta;
 
-final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRepository
+require_once 'StudentMetaRepositoryInterface.php';
+
+final class StudentMetaRepositoryInterfaceWordPressFunctionality implements StudentMetaRepositoryInterface
 {
 
     public function getByUserId(int $userId): StudentMeta
@@ -20,7 +22,7 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
     }
 
 
-    private function setMeta($userId, $metaName, $metaValue)
+    private function setMeta($userId, $metaName, $metaValue): void
     {
         if ($this->getSingleMetaOrNull($userId, $metaName) === null) {
             add_user_meta($userId, $metaName, $metaValue);

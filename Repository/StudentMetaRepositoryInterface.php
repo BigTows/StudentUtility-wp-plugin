@@ -2,7 +2,9 @@
 
 namespace StudentUtility\Repository;
 
-require_once 'meta/class-student-meta.php';
+use StudentUtility\Repository\Meta\StudentMeta;
+
+require_once 'meta/StudentMeta.php';
 
 
 /**
@@ -10,7 +12,7 @@ require_once 'meta/class-student-meta.php';
  *
  * @see \StudentUtility\Repository\Meta\StudentMeta
  */
-interface StudentMetaRepository
+interface StudentMetaRepositoryInterface
 {
 
     public const NUMBER_OF_STUDENT_CARD = 'number_of_student_card';

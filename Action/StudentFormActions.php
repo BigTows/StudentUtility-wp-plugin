@@ -1,12 +1,21 @@
 <?php
 
-class Student_Form
+namespace StudentUtility\Action;
+
+use StudentUtility\Component\TemplateManager\TemplateManager;
+use StudentUtility\Repository\StudentMetaRepositoryInterface;
+
+final class StudentFormActions
 {
 
+    /**
+     * Instance of student meta repository
+     *
+     * @var StudentMetaRepositoryInterface
+     */
+    private StudentMetaRepositoryInterface $repository;
 
-    private $repository;
-
-    public function __construct(StudentMetaRepository $repository)
+    public function __construct(StudentMetaRepositoryInterface $repository)
     {
 
         $this->repository = $repository;
@@ -32,7 +41,7 @@ class Student_Form
     public function edit_admin_registration_form($operation): void
     {
         if ('add-new-user' === $operation) {
-            Template_Manager::load(Template_Manager::STUDENT_FORM_TEMPLATE)->show();
+            TemplateManager::load(TemplateManager::STUDENT_FORM_TEMPLATE)->show();
         }
     }
 
@@ -49,7 +58,7 @@ class Student_Form
     public function crf_show_extra_profile_fields($user): void
     {
         $meta = $this->repository->getByUserId($user->ID);
-        Template_Manager::load(Template_Manager::STUDENT_FORM_VIEW_TEMPLATE)->show([
+        TemplateManager::load(TemplateManager::STUDENT_FORM_VIEW_TEMPLATE)->show([
             'numberOfStudentCard' => $meta->getNumberOfStudentCard()
         ]);
     }

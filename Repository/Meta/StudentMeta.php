@@ -1,16 +1,27 @@
 <?php
 
+namespace StudentUtility\Repository\Meta;
 
-final class Student_Meta
+/**
+ * Student Meta (entity)
+ *
+ * @package StudentUtility\Repository\Meta
+ */
+final class StudentMeta
 {
     /**
-     * @var int|null
-     */
-    private ?int $numberOfStudentCard;
-    /**
+     * User id in WordPress System
+     *
      * @var int
      */
     private int $userId;
+
+    /**
+     * Number of student card
+     *
+     * @var int|null
+     */
+    private ?int $numberOfStudentCard;
 
 
     private function __construct(int $userId, ?int $numberOfStudentCard)
@@ -40,15 +51,19 @@ final class Student_Meta
         return $this->numberOfStudentCard;
     }
 
-
+    /**
+     * Set number of student card
+     *
+     * @param int $numberOfStudentCard
+     */
     public function setNumberOfStudentCard(int $numberOfStudentCard): void
     {
         $this->numberOfStudentCard = $numberOfStudentCard;
     }
 
 
-    public static function builder(int $userId, ?int $numberOfStudentCard): \Student_Meta
+    public static function builder(int $userId, ?int $numberOfStudentCard): StudentMeta
     {
-        return new Student_Meta($userId, $numberOfStudentCard);
+        return new StudentMeta($userId, $numberOfStudentCard);
     }
 }
