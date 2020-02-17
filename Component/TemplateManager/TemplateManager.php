@@ -14,7 +14,7 @@ final class TemplateManager
     public const STUDENT_FORM_TEMPLATE = 'studentFormTemplate';
     public const STUDENT_FORM_VIEW_TEMPLATE = 'studentFormViewTemplate';
 
-    private static array $mapOfTemplate = [
+    private static $mapOfTemplate = [
         self::STUDENT_FORM_TEMPLATE      => 'form-student-add-new-user.phtml',
         self::STUDENT_FORM_VIEW_TEMPLATE => 'form-student-view-user.phtml'
     ];

@@ -14,14 +14,14 @@ final class StudentMeta
      *
      * @var int
      */
-    private int $userId;
+    private $userId;
 
     /**
      * Number of student card
      *
      * @var int|null
      */
-    private ?int $numberOfStudentCard;
+    private $numberOfStudentCard;
 
 
     private function __construct(int $userId, ?int $numberOfStudentCard)

@@ -13,7 +13,7 @@ final class StudentFormActions
      *
      * @var StudentMetaRepositoryInterface
      */
-    private StudentMetaRepositoryInterface $repository;
+    private $repository;
 
     public function __construct(StudentMetaRepositoryInterface $repository)
     {

@@ -9,7 +9,7 @@ final class Template
      *
      * @var string
      */
-    private string $pathToFile;
+    private $pathToFile;
 
     public function __construct($pathToFile)
     {
