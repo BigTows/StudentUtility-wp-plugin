@@ -3,4 +3,4 @@ Plugin helps introduce information about student like: Number of student card; i
 
 
 # Coding style
-In this project used not [WordPress codding styles](https://codex.wordpress.org/WordPress%20Coding%20Standards), and we use [PSR](https://www.php-fig.org/)
+This project uses [PSR](https://www.php-fig.org/) instead of[WordPress coding styles](https://codex.wordpress.org/WordPress%20Coding%20Standards)
