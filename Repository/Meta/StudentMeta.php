@@ -2,6 +2,8 @@
 
 namespace StudentUtility\Repository\Meta;
 
+require 'StudentRecordBook.php';
+
 /**
  * Student Meta (entity)
  *
@@ -23,7 +25,17 @@ final class StudentMeta
      */
     private $numberOfStudentCard;
 
+    /**
+     * @var ?StudentRecordBook
+     */
+    private $studentRecordBook;
 
+    /**
+     * StudentMeta constructor.
+     *
+     * @param int      $userId
+     * @param int|null $numberOfStudentCard
+     */
     private function __construct(int $userId, ?int $numberOfStudentCard)
     {
         $this->userId = $userId;
@@ -59,6 +71,20 @@ final class StudentMeta
     public function setNumberOfStudentCard(int $numberOfStudentCard): void
     {
         $this->numberOfStudentCard = $numberOfStudentCard;
+    }
+
+    public function setStudentRecordBook(StudentRecordBook $studentRecordBook): StudentMeta
+    {
+        $this->studentRecordBook = $studentRecordBook;
+        return $this;
+    }
+
+    /**
+     * @return StudentRecordBook
+     */
+    public function getStudentRecordBook(): ?StudentRecordBook
+    {
+        return $this->studentRecordBook;
     }
 
     /**

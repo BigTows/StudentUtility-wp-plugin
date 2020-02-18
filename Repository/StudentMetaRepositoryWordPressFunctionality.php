@@ -3,6 +3,7 @@
 namespace StudentUtility\Repository;
 
 use StudentUtility\Repository\Meta\StudentMeta;
+use StudentUtility\Repository\Meta\StudentRecordBook;
 
 require_once 'StudentMetaRepositoryInterface.php';
 
@@ -11,7 +12,7 @@ require_once 'StudentMetaRepositoryInterface.php';
  *
  * @package StudentUtility\Repository
  */
-final class StudentMetaRepositoryInterfaceWordPressFunctionality implements StudentMetaRepositoryInterface
+final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRepositoryInterface
 {
 
     /**
@@ -19,7 +20,12 @@ final class StudentMetaRepositoryInterfaceWordPressFunctionality implements Stud
      */
     public function getByUserId(int $userId): StudentMeta
     {
-        return StudentMeta::builder($userId, $this->getSingleMetaOrNull($userId, self::NUMBER_OF_STUDENT_CARD));
+        $studentMeta = StudentMeta::builder($userId, $this->getSingleMetaOrNull($userId, self::NUMBER_OF_STUDENT_CARD));
+        $studentRecordBook = $this->tryGetStudentRecordBookByUserId($userId);
+        if ($studentRecordBook !== null) {
+            $studentMeta->setStudentRecordBook($studentRecordBook);
+        }
+        return $studentMeta;
     }
 
     /**
@@ -29,6 +35,9 @@ final class StudentMetaRepositoryInterfaceWordPressFunctionality implements Stud
     {
         if ($studentMeta->getNumberOfStudentCard() !== null) {
             $this->setOrUpdateMetaData($studentMeta->getUserId(), self::NUMBER_OF_STUDENT_CARD, $studentMeta->getNumberOfStudentCard());
+        }
+        if ($studentMeta->getStudentRecordBook() !== null) {
+            $this->setOrUpdateMetaData($studentMeta->getUserId(), self::STUDENT_RECORD_BOOK, $studentMeta->getStudentRecordBook()->serialize());
         }
     }
 
@@ -45,6 +54,26 @@ final class StudentMetaRepositoryInterfaceWordPressFunctionality implements Stud
             add_user_meta($userId, $metaName, $metaValue);
         } else {
             update_user_meta($userId, $metaName, $metaValue);
+        }
+    }
+
+    /**
+     * Try get student record book
+     *
+     * @param int $userId
+     *
+     * @return StudentRecordBook|null
+     */
+    private function tryGetStudentRecordBookByUserId(int $userId): ?StudentRecordBook
+    {
+        try {
+            $data = StudentRecordBook::unserialize($this->getSingleMetaOrNull($userId, self::STUDENT_RECORD_BOOK));
+            if ($data instanceof StudentRecordBook) {
+                return $data;
+            }
+            return null;
+        } catch (\Throwable $exception) {
+            return null;
         }
     }
 

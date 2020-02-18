@@ -20,6 +20,11 @@ interface StudentMetaRepositoryInterface
     public const NUMBER_OF_STUDENT_CARD = 'number_of_student_card';
 
     /**
+     * Key of meta for student record book
+     */
+    public const STUDENT_RECORD_BOOK = 'student_record_book';
+
+    /**
      * Get Student meta by user id
      *
      * @param int $userId based on wordpress system
