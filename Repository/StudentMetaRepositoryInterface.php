@@ -4,7 +4,7 @@ namespace StudentUtility\Repository;
 
 use StudentUtility\Repository\Meta\StudentMeta;
 
-require_once 'meta/StudentMeta.php';
+require_once 'Meta/StudentMeta.php';
 
 
 /**
