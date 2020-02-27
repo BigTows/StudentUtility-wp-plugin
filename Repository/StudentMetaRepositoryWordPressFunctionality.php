@@ -31,6 +31,26 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
     /**
      * {@inheritDoc}
      */
+    public function getStudentByStudentId(int $studentId): ?StudentMeta
+    {
+        $users = get_users(
+            [
+                'meta_key'    => self::NUMBER_OF_STUDENT_CARD,
+                'meta_value'  => $studentId,
+                'number'      => 1,
+                'count_total' => false
+            ]);
+        if (count($users) === 1) {
+            $user = current($users);
+            return $this->getByUserId($user->ID);
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function save(StudentMeta $studentMeta): void
     {
         if ($studentMeta->getNumberOfStudentCard() !== null) {
