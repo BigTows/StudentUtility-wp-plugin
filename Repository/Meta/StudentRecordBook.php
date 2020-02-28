@@ -51,7 +51,6 @@ final class StudentRecordBook
     public static function unserialize($serialized): StudentRecordBook
     {
         $data = json_decode($serialized, true, 512, JSON_THROW_ON_ERROR);
-
         $academicYears = [];
         foreach ($data['academicYearList'] as $value) {
             $academicYears[] = AcademicYear::unserialize($value);

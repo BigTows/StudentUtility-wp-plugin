@@ -4,6 +4,7 @@ namespace StudentUtility\Repository;
 
 use StudentUtility\Repository\Meta\StudentMeta;
 use StudentUtility\Repository\Meta\StudentRecordBook;
+use Throwable;
 
 require_once 'StudentMetaRepositoryInterface.php';
 
@@ -92,7 +93,7 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
                 return $data;
             }
             return null;
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             return null;
         }
     }

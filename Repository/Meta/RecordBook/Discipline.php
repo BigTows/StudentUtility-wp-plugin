@@ -4,6 +4,7 @@
 namespace StudentUtility\Repository\Meta\RecordBook;
 
 
+use DateTimeImmutable;
 use DateTimeInterface;
 
 /**
@@ -115,6 +116,8 @@ final class Discipline
 
     /**
      * @param string $name
+     *
+     * @return Discipline
      */
     public function setName(string $name): Discipline
     {
@@ -187,8 +190,8 @@ final class Discipline
             'name'         => $this->name,
             'type'         => $this->typeExam,
             'hoursPerYear' => $this->hoursPerYear,
-            'result'       => $this->rating,
-            'resultDate'   => $this->resultDate === null ? null : $this->resultDate->getTimestamp(),
+            'rating'       => $this->rating,
+            'resultDate'   => $this->resultDate === null ? null : $this->resultDate->format('Y-m-d'),
             'teacher'      => $this->teacher
         ];
     }
@@ -199,10 +202,10 @@ final class Discipline
     public static function unserialize($serialized): Discipline
     {
         $name = $serialized['name'];
-        $type = $serialized['typeExam'];
+        $type = $serialized['type'];
         $hoursPerYear = $serialized['hoursPerYear'];
         $self = new self($name, $type, $hoursPerYear);
-        $self->resultDate = empty($serialized['resultDate']) ? null : (new \DateTime())->setTimestamp($serialized['resultDate']);
+        $self->resultDate = empty($serialized['resultDate']) ? null : DateTimeImmutable::createFromFormat('Y-m-d', $serialized['resultDate']);
         $self->teacher = $serialized['teacher'];
         $self->rating = $serialized['rating'];
         return $self;
