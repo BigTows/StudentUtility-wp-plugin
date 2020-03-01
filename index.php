@@ -7,6 +7,7 @@ Author: Alexander @BigTows Chapchuk, Maxim @SphinxKingStone Mishakov
 Version: 1.0
 Author URI: bigtows.org
 License: GPLv3
+Requires PHP: 7.3
 */
 
 namespace StudentUtility;
