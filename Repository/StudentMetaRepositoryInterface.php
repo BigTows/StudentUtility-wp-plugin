@@ -43,6 +43,13 @@ interface StudentMetaRepositoryInterface
     public function getStudentByStudentId(int $studentId): ?StudentMeta;
 
     /**
+     * Get all student's id
+     *
+     * @return array of id's
+     */
+    public function getAllStudentId(): array;
+
+    /**
      * Save student meta data
      *
      * @param StudentMeta $studentMeta instance for saving

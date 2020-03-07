@@ -21,11 +21,15 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
      */
     public function getByUserId(int $userId): StudentMeta
     {
-        $studentMeta = StudentMeta::builder($userId, $this->getSingleMetaOrNull($userId, self::NUMBER_OF_STUDENT_CARD));
+        $studentMeta       = StudentMeta::builder(
+            $userId,
+            $this->getSingleMetaOrNull($userId, self::NUMBER_OF_STUDENT_CARD)
+        );
         $studentRecordBook = $this->tryGetStudentRecordBookByUserId($userId);
         if ($studentRecordBook !== null) {
             $studentMeta->setStudentRecordBook($studentRecordBook);
         }
+
         return $studentMeta;
     }
 
@@ -40,9 +44,11 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
                 'meta_value'  => $studentId,
                 'number'      => 1,
                 'count_total' => false
-            ]);
+            ]
+        );
         if (count($users) === 1) {
             $user = current($users);
+
             return $this->getByUserId($user->ID);
         }
 
@@ -52,13 +58,38 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
     /**
      * {@inheritDoc}
      */
+    public function getAllStudentId(): array
+    {
+        global $wpdb;
+        $metaKey = self::NUMBER_OF_STUDENT_CARD;
+        $metas   = $wpdb->get_results("SELECT * FROM $wpdb->usermeta WHERE meta_key = '{$metaKey}'");
+
+        $result = [];
+        foreach ($metas as $meta) {
+            $result[] = $meta->meta_value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function save(StudentMeta $studentMeta): void
     {
         if ($studentMeta->getNumberOfStudentCard() !== null) {
-            $this->setOrUpdateMetaData($studentMeta->getUserId(), self::NUMBER_OF_STUDENT_CARD, $studentMeta->getNumberOfStudentCard());
+            $this->setOrUpdateMetaData(
+                $studentMeta->getUserId(),
+                self::NUMBER_OF_STUDENT_CARD,
+                $studentMeta->getNumberOfStudentCard()
+            );
         }
         if ($studentMeta->getStudentRecordBook() !== null) {
-            $this->setOrUpdateMetaData($studentMeta->getUserId(), self::STUDENT_RECORD_BOOK, $studentMeta->getStudentRecordBook()->serialize());
+            $this->setOrUpdateMetaData(
+                $studentMeta->getUserId(),
+                self::STUDENT_RECORD_BOOK,
+                $studentMeta->getStudentRecordBook()->serialize()
+            );
         }
     }
 
@@ -92,6 +123,7 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
             if ($data instanceof StudentRecordBook) {
                 return $data;
             }
+
             return null;
         } catch (Throwable $exception) {
             return null;
@@ -109,9 +141,10 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
     private function getSingleMetaOrNull(int $userId, string $metaName)
     {
         $result = get_user_meta($userId, $metaName);
-        if (!is_array($result) || count($result) === 0) {
+        if ( ! is_array($result) || count($result) === 0) {
             return null;
         }
+
         return current($result);
     }
 }
