@@ -4,13 +4,17 @@
 
 <table class="form-table">
     <tr>
-        <th><label for="numberOfStudentCard"><?php esc_html_e('Number of student card', LOCALE_DOMAIN); ?></label></th>
+        <td><label for="numberOfStudentCard"><?php esc_html_e('Number of student card', LOCALE_DOMAIN); ?></label></td>
         <td>
-            <input type="number" id="numberOfStudentCard" name="numberOfStudentCard" class="regular-text" value="<?php echo $data['numberOfStudentCard']?>"/>
+            <input type="number" id="numberOfStudentCard" name="numberOfStudentCard" class="regular-text"
+                   value="<?php echo $data['numberOfStudentCard'] ?>"/>
         </td>
-        <th><label for="middleNameOfStudent"><?php esc_html_e('Middle name of student', LOCALE_DOMAIN); ?></label></th>
+    </tr>
+    <tr>
+        <td><label for="middleNameOfStudent"><?php esc_html_e('Middle name of student', LOCALE_DOMAIN); ?></label></td>
         <td>
-            <input type="text" id="middleNameOfStudent" name="middleNameOfStudent" class="regular-text" value="<?php echo $data['middleNameOfStudent']?>"/>
+            <input type="text" id="middleNameOfStudent" name="middleNameOfStudent" class="regular-text"
+                   value="<?php echo $data['middleNameOfStudent'] ?>"/>
         </td>
     </tr>
 </table>
