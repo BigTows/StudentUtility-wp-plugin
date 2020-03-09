@@ -54,13 +54,19 @@ final class StudentFormActions
             $meta->setNumberOfStudentCard((int)$_POST['numberOfStudentCard']);
             $this->repository->save($meta);
         }
+        if (!empty($_POST['middleNameOfStudent'])) {
+            $meta = $this->repository->getByUserId($user_id);
+            $meta->setMiddleNameOfStudent((string)$_POST['middleNameOfStudent']);
+            $this->repository->save($meta);
+        }
     }
 
     public function crf_show_extra_profile_fields($user): void
     {
         $meta = $this->repository->getByUserId($user->ID);
         TemplateManager::load(TemplateManager::STUDENT_FORM_VIEW_TEMPLATE)->show([
-            'numberOfStudentCard' => $meta->getNumberOfStudentCard()
+            'numberOfStudentCard' => $meta->getNumberOfStudentCard(),
+            'middleNameOfStudent' => $meta->getMiddleNameOfStudent()
         ]);
     }
 
@@ -68,7 +74,8 @@ final class StudentFormActions
     {
         $meta = $this->repository->getByUserId($user->ID);
         TemplateManager::load(TemplateManager::STUDENT_FORM_EDIT_TEMPLATE)->show([
-            'numberOfStudentCard' => $meta->getNumberOfStudentCard()
+            'numberOfStudentCard' => $meta->getNumberOfStudentCard(),
+            'middleNameOfStudent' => $meta->getMiddleNameOfStudent()
         ]);
     }
 }

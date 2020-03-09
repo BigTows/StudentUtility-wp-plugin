@@ -23,7 +23,8 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
     {
         $studentMeta       = StudentMeta::builder(
             $userId,
-            $this->getSingleMetaOrNull($userId, self::NUMBER_OF_STUDENT_CARD)
+            $this->getSingleMetaOrNull($userId, self::NUMBER_OF_STUDENT_CARD),
+            $this->getSingleMetaOrNull($userId, self::MIDDLE_NAME_OF_STUDENT)
         );
         $studentRecordBook = $this->tryGetStudentRecordBookByUserId($userId);
         if ($studentRecordBook !== null) {

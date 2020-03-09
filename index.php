@@ -2,7 +2,7 @@
 /*
 Plugin Name: Student Utility
 Plugin URI: https://github.com/BigTows/StudentUtility-wp-plugin
-Description: Plugin helps introduce information about student like: Number of student card; into WordPress
+Description: Plugin helps introduce information about student like: Number of student card and students middle name; into WordPress
 Author: Alexander @BigTows Chapchuk, Maxim @SphinxKingStone Mishakov
 Version: 1.1
 Author URI: bigtows.org

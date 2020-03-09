@@ -21,3 +21,6 @@ msgstr "Информация о студенте"
 
 msgid "Number of student card"
 msgstr "№ студенческого билета"
+
+msgid "Middle name of student"
+msgstr "Отчество студента"
