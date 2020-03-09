@@ -85,6 +85,13 @@ final class StudentMetaRepositoryWordPressFunctionality implements StudentMetaRe
                 $studentMeta->getNumberOfStudentCard()
             );
         }
+        if ($studentMeta->getMiddleNameOfStudent() !== null) {
+            $this->setOrUpdateMetaData(
+                $studentMeta->getUserId(),
+                self::MIDDLE_NAME_OF_STUDENT,
+                $studentMeta->getMiddleNameOfStudent()
+            );
+        }
         if ($studentMeta->getStudentRecordBook() !== null) {
             $this->setOrUpdateMetaData(
                 $studentMeta->getUserId(),
