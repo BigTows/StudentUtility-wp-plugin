@@ -20,6 +20,11 @@ interface StudentMetaRepositoryInterface
     public const NUMBER_OF_STUDENT_CARD = 'number_of_student_card';
 
     /**
+     * Key of meta for students middle name
+     */
+    public const MIDDLE_NAME_OF_STUDENT = 'middle_name_of_student';
+
+    /**
      * Key of meta for student record book
      */
     public const STUDENT_RECORD_BOOK = 'student_record_book';

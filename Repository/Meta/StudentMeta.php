@@ -26,6 +26,13 @@ final class StudentMeta
     private $numberOfStudentCard;
 
     /**
+     * Students middle name
+     *
+     * @var string|null
+     */
+    private $middleNameOfStudent;
+
+    /**
      * @var ?StudentRecordBook
      */
     private $studentRecordBook;
@@ -35,11 +42,13 @@ final class StudentMeta
      *
      * @param int      $userId
      * @param int|null $numberOfStudentCard
+     * @param string|null $middleNameOfStudent
      */
-    private function __construct(int $userId, ?int $numberOfStudentCard)
+    private function __construct(int $userId, ?int $numberOfStudentCard, ?string $middleNameOfStudent)
     {
         $this->userId = $userId;
         $this->numberOfStudentCard = $numberOfStudentCard;
+        $this->middleNameOfStudent = $middleNameOfStudent;
     }
 
 
@@ -64,6 +73,16 @@ final class StudentMeta
     }
 
     /**
+     * Students middle name
+     *
+     * @return string|null
+     */
+    public function getMiddleNameOfStudent(): ?string
+    {
+        return $this->middleNameOfStudent;
+    }
+
+    /**
      * Set number of student card
      *
      * @param int $numberOfStudentCard
@@ -71,6 +90,16 @@ final class StudentMeta
     public function setNumberOfStudentCard(int $numberOfStudentCard): void
     {
         $this->numberOfStudentCard = $numberOfStudentCard;
+    }
+
+    /**
+     * Set middle name of student
+     *
+     * @param string $middleNameOfStudent
+     */
+    public function setMiddleNameOfStudent(string $middleNameOfStudent): void
+    {
+        $this->middleNameOfStudent = $middleNameOfStudent;
     }
 
     public function setStudentRecordBook(StudentRecordBook $studentRecordBook): StudentMeta
@@ -92,11 +121,12 @@ final class StudentMeta
      *
      * @param int      $userId
      * @param int|null $numberOfStudentCard
+     * @param string|null $middleNameOfStudent
      *
      * @return StudentMeta
      */
-    public static function builder(int $userId, ?int $numberOfStudentCard): StudentMeta
+    public static function builder(int $userId, ?int $numberOfStudentCard, ?string $middleNameOfStudent): StudentMeta
     {
-        return new StudentMeta($userId, $numberOfStudentCard);
+        return new StudentMeta($userId, $numberOfStudentCard, $middleNameOfStudent);
     }
 }
